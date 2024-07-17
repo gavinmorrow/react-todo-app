@@ -58,9 +58,7 @@ const ListRow: React.FC<ListRowProps> = (props) => {
           }
 
           if (!props.isNew) {
-            const form = e.target as HTMLFormElement;
-            const input = form.elements[0] as HTMLElement;
-            input.blur();
+            document.getElementById("itemInput")!.focus();
           } else {
             props.addItem!(props.todoItem.text);
             setText("");
@@ -68,6 +66,7 @@ const ListRow: React.FC<ListRowProps> = (props) => {
         }}
       >
         <TextField
+          id={props.isNew ? "itemInput" : undefined}
           style={{ width: "100%" }}
           value={text}
           onChange={(e) => setText(e.target.value)}
