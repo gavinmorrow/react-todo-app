@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./App.css";
 
 import ListRow from "./ListRow";
-import Input from "./Input";
 import TodoItem, { loadItems, pruneItems } from "./TodoItem";
 
 import { ThemeProvider } from "@emotion/react";
