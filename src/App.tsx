@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./App.css";
 
-import ListRow from "./ListRow";
-import TodoItem, { loadItems, pruneItems } from "./TodoItem";
+import ListRow from "./components/ListRow/ListRow";
+import TodoItem, { loadItems, pruneItems } from "./model/TodoItem";
 
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material";

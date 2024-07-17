@@ -1,8 +1,0 @@
-.list-row {
-  display: flex;
-  align-items: center;
-}
-
-#listRowForm {
-  flex-grow: 1;
-}
