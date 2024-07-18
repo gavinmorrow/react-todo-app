@@ -17,6 +17,5 @@
 }
 
 .list-row.input .delete {
-  visibilty: hidden;
-  opacity: 0;
+  visibility: hidden;
 }
