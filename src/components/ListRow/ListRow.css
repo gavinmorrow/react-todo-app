@@ -18,6 +18,6 @@
   opacity: 1;
 }
 /* hide always if the new row */
-.list-row.input .delete {
+#list-row-input .delete {
   visibility: hidden;
 }

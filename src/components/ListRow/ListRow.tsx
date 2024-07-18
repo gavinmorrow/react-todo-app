@@ -32,9 +32,8 @@ const ListRow: React.FC<ListRowProps> = (props) => {
 
   return (
     <li
-      className={`list-row ${props.todoItem.completed ? "completed" : ""} ${
-        props.isNew ? "input" : ""
-      }`}
+      className={`list-row ${props.todoItem.completed ? "completed" : ""}`}
+      id={props.isNew ? "list-row-input" : ""}
     >
       <IconButton
         sx={{ ml: -1 }}
