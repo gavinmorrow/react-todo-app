@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 import ListRow from "./components/ListRow/ListRow";
-import TodoItem, { loadItems, pruneItems } from "./model/TodoItem";
+import TodoItem, {
+  addItem,
+  deleteItem,
+  loadItems,
+  pruneItems,
+  setItem,
+} from "./model/TodoItem";
 
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material";
@@ -12,29 +18,43 @@ function App() {
   // clear errors from prev run
   console.clear();
 
-  const [todoItems, _setTodoItems] = useState(loadItems());
-  const setTodoItems = (items: typeof todoItems) => {
-    _setTodoItems(items);
-    // serialize to localstorage
-    const json = JSON.stringify(items);
-    localStorage.setItem("items", json);
-  };
-  const appendTodoItem = (text: string) =>
-    setTodoItems(pruneItems([...todoItems, new TodoItem(uuid(), text)]));
+  const [todoItems, _setTodoItems] = useState([] as TodoItem[]);
 
-  const setTodoItem = (newItem: TodoItem) => {
-    setTodoItems(
-      todoItems.map((item) => {
-        if (item.id === newItem.id) {
-          item = newItem;
-        }
-        return item;
-      }),
-    );
-  };
+  useEffect(
+    () =>
+      void loadItems()
+        .then((items) => _setTodoItems(items))
+        .catch((err) => {
+          console.error("Error loading items:", err);
+        }),
+    [],
+  );
+
+  const appendTodoItem = (text: string) =>
+    addItem(new TodoItem(uuid(), text))
+      .then((newItem) => {
+        _setTodoItems(todoItems.concat(newItem));
+      })
+      .catch((err) => console.error("Error adding item:", err));
+
+  const setTodoItem = (newItem: TodoItem) =>
+    setItem(newItem)
+      .then(() =>
+        _setTodoItems(
+          todoItems.map((item) => {
+            if (item.id === newItem.id) return newItem;
+            else return item;
+          }),
+        ),
+      )
+      .catch((err) => console.error("Error updating item:", err));
 
   const deleteTodoItem = (target: TodoItem) =>
-    setTodoItems(todoItems.filter((item) => item.id !== target.id));
+    deleteItem(target)
+      .then(() =>
+        _setTodoItems(todoItems.filter((item) => item.id !== target.id)),
+      )
+      .catch((err) => console.error("Error deleting item:", err));
 
   const darkTheme = createTheme({
     palette: {
@@ -44,7 +64,7 @@ function App() {
   const theme = darkTheme;
 
   return (
-    <div onClick={() => setTodoItems(pruneItems(todoItems))}>
+    <div onClick={() => _setTodoItems(pruneItems(todoItems))}>
       <div className="App">
         <ThemeProvider theme={theme}>
           <h1>Todo</h1>
