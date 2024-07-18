@@ -31,7 +31,9 @@ const ListRow: React.FC<ListRowProps> = (props) => {
   };
 
   return (
-    <li className={`list-row ${props.todoItem.completed ? "completed" : ""}`}>
+    <li
+      className={`list-row ${props.todoItem.completed ? "completed" : ""} ${props.isNew ? "input" : ""}`}
+    >
       <IconButton
         sx={{ ml: -1 }}
         aria-label={
@@ -48,7 +50,7 @@ const ListRow: React.FC<ListRowProps> = (props) => {
       </IconButton>
 
       <form
-        id="listRowForm"
+        className="listRowForm"
         onSubmit={(e) => {
           e.preventDefault();
 
@@ -75,6 +77,7 @@ const ListRow: React.FC<ListRowProps> = (props) => {
       </form>
 
       <IconButton
+        className="delete"
         aria-label="delete item"
         disabled={props.isNew}
         onClick={() => props.deleteTodoItem(props.todoItem)}
