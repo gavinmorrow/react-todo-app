@@ -48,8 +48,6 @@ function App() {
       <ThemeProvider theme={theme}>
         <h1>Todo</h1>
 
-        {/* <Input addListRow={appendTodoItem} /> */}
-
         <ul
           style={{
             listStyleType: "none",
