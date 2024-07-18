@@ -32,7 +32,9 @@ const ListRow: React.FC<ListRowProps> = (props) => {
 
   return (
     <li
-      className={`list-row ${props.todoItem.completed ? "completed" : ""} ${props.isNew ? "input" : ""}`}
+      className={`list-row ${props.todoItem.completed ? "completed" : ""} ${
+        props.isNew ? "input" : ""
+      }`}
     >
       <IconButton
         sx={{ ml: -1 }}
@@ -77,6 +79,7 @@ const ListRow: React.FC<ListRowProps> = (props) => {
       </form>
 
       <IconButton
+        sx={{ mr: -1 }}
         className="delete"
         aria-label="delete item"
         disabled={props.isNew}
