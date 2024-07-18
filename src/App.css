@@ -1,18 +1,25 @@
 .App {
+  /* really just an h1 and ul, but whatever */
   display: flex;
   flex-direction: column;
   gap: 1em;
 
+  /* max width */
   max-width: 33em;
   margin: auto;
 
+  /* expand to full height */
   min-height: 100vh;
   box-sizing: border-box;
+
   padding: 1em;
+
+  /* dark mode */
   color: white;
   background-color: oklch(16% 0.042 190);
 }
 
 .App > * {
+  /* a gap is already being set above */
   margin: 0;
 }

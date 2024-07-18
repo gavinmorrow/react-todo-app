@@ -1,21 +1,23 @@
 .list-row {
+  /* for a checkbox, text input, and delete button */
   display: flex;
   align-items: center;
 }
 
 .listRowForm {
+  /* expand to fill */
   flex-grow: 1;
 }
 
+/* hide unless hover or focus */
 .list-row .delete {
   opacity: 0;
 }
-
 .list-row:hover .delete,
 .list-row:has(:focus) .delete {
   opacity: 1;
 }
-
+/* hide always if the new row */
 .list-row.input .delete {
   visibility: hidden;
 }
