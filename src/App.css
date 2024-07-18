@@ -3,6 +3,9 @@
   flex-direction: column;
   gap: 1em;
 
+  max-width: 33em;
+  margin: auto;
+
   min-height: 100vh;
   box-sizing: border-box;
   padding: 1em;
