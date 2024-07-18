@@ -44,35 +44,38 @@ function App() {
   const theme = darkTheme;
 
   return (
-    <div className="App">
-      <ThemeProvider theme={theme}>
-        <h1>Todo</h1>
+    <div onClick={() => setTodoItems(pruneItems(todoItems))}>
+      <div className="App">
+        <ThemeProvider theme={theme}>
+          <h1>Todo</h1>
 
-        <ul
-          style={{
-            listStyleType: "none",
-            paddingLeft: "0",
-          }}
-        >
-          {todoItems.map((todoItem) => (
+          <ul
+            style={{
+              listStyleType: "none",
+              paddingLeft: "0",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {todoItems.map((todoItem) => (
+              <ListRow
+                todoItem={todoItem}
+                setTodoItem={setTodoItem}
+                deleteTodoItem={deleteTodoItem}
+                key={todoItem.id}
+              />
+            ))}
+
             <ListRow
-              todoItem={todoItem}
-              setTodoItem={setTodoItem}
-              deleteTodoItem={deleteTodoItem}
-              key={todoItem.id}
+              todoItem={new TodoItem(uuid(), "", false)}
+              setTodoItem={() => {}}
+              addItem={appendTodoItem}
+              deleteTodoItem={() => {}}
+              isNew={true}
+              key="new!"
             />
-          ))}
-
-          <ListRow
-            todoItem={new TodoItem(uuid(), "", false)}
-            setTodoItem={() => {}}
-            addItem={appendTodoItem}
-            deleteTodoItem={() => {}}
-            isNew={true}
-            key="new!"
-          />
-        </ul>
-      </ThemeProvider>
+          </ul>
+        </ThemeProvider>
+      </div>
     </div>
   );
 }
